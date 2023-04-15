@@ -5,27 +5,39 @@ import axios from 'axios';
 const Update = ({ post, handleUpdatePost, setShowEditForm }) => {
   const [heading, setHeading] = useState(post.heading);
   const [blogpost, setBlogpost] = useState(post.blogpost);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(
+  );
 
   const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      await axios.put(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${post.id}`, {
+  try {
+    setLoading(true);
+    const response = await fetch(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${post.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         heading,
         blogpost
-      });
-      handleUpdatePost({
+      })
+    });
+    if (response.ok) {
+      const updatedPost = {
         id: post.id,
         heading,
         blogpost
-      });
+      };
+      handleUpdatePost(updatedPost);
       setShowEditForm(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+    } else {
+      throw new Error('Failed to update post.');
     }
-  };
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <Form onSubmit={handleSubmit}>
