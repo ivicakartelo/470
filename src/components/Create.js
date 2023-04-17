@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+//import { useNavigate } from 'react-router';
 
-const Create = ({ addNewPost, delayTime }) => {
-  const navigate = useNavigate();
+const Create = ({ addNewPost }) => {
+  //const navigate = useNavigate();
   const [heading, setHeading] = useState('');
   const [blogpost, setBlogpost] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,10 @@ const Create = ({ addNewPost, delayTime }) => {
         }
       );
       addNewPost(response.data);
-      navigate('/');
+      setIsLoading(false);
+      //navigate('/');
+      setHeading('')
+      setBlogpost('')
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +36,7 @@ const Create = ({ addNewPost, delayTime }) => {
         <input
           placeholder='heading'
           onChange={(e) => setHeading(e.target.value)}
+          value={heading}
         />
       </Form.Field>
       <div className='ui form'>
@@ -41,6 +45,7 @@ const Create = ({ addNewPost, delayTime }) => {
           <textarea
             placeholder='blogpost'
             onChange={(e) => setBlogpost(e.target.value)}
+            value={blogpost}
           ></textarea>
         </div>
       </div>

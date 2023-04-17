@@ -7,7 +7,7 @@ function BlogPostsMenuLeft({ blogposts }) {
   useEffect(() => {
     const sorted = [...blogposts].sort((a, b) => b.id - a.id);
     setSortedPosts(sorted);
-    alert("BlogPostsMenuLeft.js finished rendering");
+    //alert("BlogPostsMenuLeft.js finished rendering");
   }, [blogposts]);
 
   return (

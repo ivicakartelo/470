@@ -7,13 +7,13 @@ import LoginModal from './components/LoginModal'
 
 function App() {
 
-  const [APIData, setAPIData] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`)
         .then((response) => {
-            setAPIData(response.data);
-            alert("App.js finished rendering")
+            setPosts(response.data);
+            //alert("App.js finished rendering")
         })
 }, [])
 
@@ -25,7 +25,7 @@ function App() {
         <LoginModal />
       </div>
       <div className="grid_2">
-        <BlogPostsMenuLeft blogposts={ APIData }/>
+        <BlogPostsMenuLeft blogposts={ posts }/>
       </div>
       <div className="grid_4 last">
         <Outlet />

@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function BlogpostsMenu({ blogposts }) {
+function BlogpostsMenu() {
 
-    const [APIData, setAPIData] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`)
             .then((response) => {
                 const sortedData = response.data.sort((a, b) => b.id - a.id);
-                setAPIData(sortedData);
+                setPosts(sortedData);
             })
             .catch((error) => {
                 console.log(error);
@@ -19,7 +19,7 @@ function BlogpostsMenu({ blogposts }) {
 
     return (
         <>
-            {APIData.map((post) => (
+            {posts.map((post) => (
                 <div key={post.id}> 
                     <h1>
                         <Link to={`/${post.id}`}>

@@ -18,7 +18,7 @@ function Read() {
         const posts = response.data;
         setPosts(posts);
         setIsLoading(false);
-        alert("Read.js finished rendering")
+        //alert("Read.js finished rendering")
       } catch (error) {
         console.log(error);
       }
@@ -34,7 +34,8 @@ function Read() {
     try {
       await axios.delete(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${id}`);
       setPosts(posts.filter(post => post.id !== id));
-    } catch (error) {
+    } catch 
+    (error) {
       console.log(error);
     }
   };
