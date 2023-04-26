@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, TextArea, Dimmer, Loader } from 'semantic-ui-react';
-import axios from 'axios';
 
 const Update = ({ post, handleUpdatePost, setShowEditForm }) => {
   const [heading, setHeading] = useState(post.heading);

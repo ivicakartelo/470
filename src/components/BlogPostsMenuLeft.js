@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-function BlogPostsMenuLeft({ blogposts }) {
+function BlogPostsMenuLeft({ posts }) {
   const [sortedPosts, setSortedPosts] = useState([]);
 
   useEffect(() => {
-    const sorted = [...blogposts].sort((a, b) => b.id - a.id);
+    const sorted = [...posts].sort((a, b) => b.id - a.id);
     setSortedPosts(sorted);
     //alert("BlogPostsMenuLeft.js finished rendering");
-  }, [blogposts]);
+  }, [posts]);
 
   return (
     <ul>

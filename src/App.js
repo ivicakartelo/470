@@ -25,7 +25,7 @@ function App() {
         <LoginModal />
       </div>
       <div className="grid_2">
-        <BlogPostsMenuLeft blogposts={ posts }/>
+        <BlogPostsMenuLeft posts={ posts }/>
       </div>
       <div className="grid_4 last">
         <Outlet />
