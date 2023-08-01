@@ -7,7 +7,7 @@ function BlogpostsMenu() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`)
+            axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`)
             .then((response) => {
                 const sortedData = response.data.sort((a, b) => b.id - a.id);
                 setPosts(sortedData);

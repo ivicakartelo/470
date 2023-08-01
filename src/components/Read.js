@@ -5,24 +5,25 @@ import axios from 'axios';
 import Update from './Update';
 import Create from './Create';
 
-function Read() {
+
+const Read = () => {
   const [posts, setPosts] = useState([]);
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [updateId, setUpdateId] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [postToUpdate, setPostToUpdate] = useState(null); // New state for the post to be updated
+
+  async function fetchPosts() {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`);
+      const posts = response.data;
+      setPosts(posts);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const response = await axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`);
-        const posts = response.data;
-        setPosts(posts);
-        setIsLoading(false);
-        //alert("Read.js finished rendering")
-      } catch (error) {
-        console.log(error);
-      }
-    }
     fetchPosts();
   }, []);
 
@@ -33,21 +34,19 @@ function Read() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${id}`);
-      setPosts(posts.filter(post => post.id !== id));
-    } catch 
-    (error) {
+      setPosts(posts.filter((post) => post.id !== id));
+    } catch (error) {
       console.log(error);
     }
   };
 
-  const handleUpdate = (id) => {
-    setUpdateId(id);
-    setShowEditForm(true);
+  const handleEdit = (post) => {
+    setPostToUpdate(post); // Set the post that needs to be updated
   };
 
   const handleUpdatePost = (updatedPost) => {
-    setPosts(posts.map(post => post.id === updatedPost.id ? updatedPost : post));
-    setShowEditForm(false);
+    setPosts(posts.map((post) => (post.id === updatedPost.id ? updatedPost : post)));
+    setPostToUpdate(null); // Clear the post to update after updating it
   };
 
   return (
@@ -55,8 +54,9 @@ function Read() {
       <Link to="/">Home</Link> | { }
       <Link to="/read">Admin</Link>
       <Create addNewPost={handleAddNewPost} />
+
       {isLoading ? (
-        <Loader active inline='centered' />
+        <Loader active inline="centered" />
       ) : (
         <Table celled>
           <Table.Header>
@@ -69,26 +69,33 @@ function Read() {
           </Table.Header>
 
           <Table.Body>
-            {posts.slice().reverse().map(post => ( // use slice() to create a copy of the array before reversing it
-              <Table.Row key={post.id}>
-                <Table.Cell>{post.id}</Table.Cell>
-                <Table.Cell>{post.heading}</Table.Cell>
-                <Table.Cell>{post.blogpost}</Table.Cell>
-                <Table.Cell>
-                  {showEditForm && updateId === post.id ? (
-                    <Update
-                      post={post}
-                      handleUpdatePost={handleUpdatePost}
-                      setShowEditForm={setShowEditForm}
-                    />
-                  ) : (
-                    <Button color='yellow' onClick={() => handleUpdate(post.id)}>
+            {posts.slice().reverse().map((post) => (
+              <React.Fragment key={post.id}>
+                <Table.Row>
+                  <Table.Cell>{post.id}</Table.Cell>
+                  <Table.Cell>{post.heading}</Table.Cell>
+                  <Table.Cell>{post.blogpost}</Table.Cell>
+                  <Table.Cell>
+                    <Button color="yellow" onClick={() => handleEdit(post)}>
                       Update
                     </Button>
-                  )}
-                  <Button color='red' onClick={() => handleDelete(post.id)}>Delete</Button>
-                </Table.Cell>
-              </Table.Row>
+                    <Button color="red" onClick={() => handleDelete(post.id)}>
+                      Delete
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+                {postToUpdate && postToUpdate.id === post.id && ( // Conditional rendering for the Update form
+                  <Table.Row>
+                    <Table.Cell colSpan={4}> {/* Use colSpan to span the entire row */}
+                      <Update
+                        post={postToUpdate}
+                        handleUpdatePost={handleUpdatePost}
+                        setShowEditForm={setPostToUpdate} // Pass the setPostToUpdate function to close the form
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                )}
+              </React.Fragment>
             ))}
           </Table.Body>
         </Table>

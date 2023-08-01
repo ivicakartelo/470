@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import axios from 'axios';
-//import { useNavigate } from 'react-router';
 
 const Create = ({ addNewPost }) => {
-  //const navigate = useNavigate();
   const [heading, setHeading] = useState('');
   const [blogpost, setBlogpost] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +19,6 @@ const Create = ({ addNewPost }) => {
       );
       addNewPost(response.data);
       setIsLoading(false);
-      //navigate('/');
       setHeading('')
       setBlogpost('')
     } catch (error) {

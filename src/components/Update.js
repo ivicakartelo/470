@@ -4,8 +4,7 @@ import { Button, Form, Input, TextArea, Dimmer, Loader } from 'semantic-ui-react
 const Update = ({ post, handleUpdatePost, setShowEditForm }) => {
   const [heading, setHeading] = useState(post.heading);
   const [blogpost, setBlogpost] = useState(post.blogpost);
-  const [loading, setLoading] = useState(
-  );
+  const [loading, setLoading] = useState();
 
   const handleSubmit = async () => {
   try {
@@ -26,8 +25,7 @@ const Update = ({ post, handleUpdatePost, setShowEditForm }) => {
         heading,
         blogpost
       };
-      handleUpdatePost(updatedPost);
-      setShowEditForm(false);
+      handleUpdatePost(updatedPost)
     } else {
       throw new Error('Failed to update post.');
     }
