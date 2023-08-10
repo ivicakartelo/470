@@ -19,9 +19,7 @@ root.render(
       <Route path="/" element={<App />} >
       <Route
         index
-        element={
-          <BlogpostsMenu />
-        }
+        element={<BlogpostsMenu />}
       />
       <Route path=":id" element={<BlogPost />} />
     </Route>
