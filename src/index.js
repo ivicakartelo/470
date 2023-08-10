@@ -9,7 +9,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom"
-import blogposts from './components/blogposts-data'
 import 'semantic-ui-css/semantic.min.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,10 +20,10 @@ root.render(
       <Route
         index
         element={
-          <BlogpostsMenu blogposts={ blogposts } />
+          <BlogpostsMenu />
         }
       />
-      <Route path=":id" element={<BlogPost blogposts={ blogposts } />} />
+      <Route path=":id" element={<BlogPost />} />
     </Route>
     <Route path="/read" element={<Read />} />
     </Routes>
