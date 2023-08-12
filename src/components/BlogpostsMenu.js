@@ -8,6 +8,7 @@ function BlogpostsMenu() {
     console.log(posts)
     useEffect(() => {
         alert("BlogPostsMenu.js finished rendering");
+        console.log("BlogPostsMenu.js finished rendering")
             axios.get(`https://640114a00a2a1afebee5c77d.mockapi.io/post1`)
             .then((response) => {
                 const sortedData = response.data.sort((a, b) => b.id - a.id);
