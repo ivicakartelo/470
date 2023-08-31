@@ -19,6 +19,7 @@ function App() {
         })
 }, [])
 
+    const simplifiedPosts = [...posts].sort((a, b) => b.id - a.id).map(({ id, heading }) => ({ id, heading }));
 
   return (
     <div className="container">
@@ -28,7 +29,7 @@ function App() {
         <LoginModal />
       </div>
       <div className="grid_2">
-        <BlogPostsMenuLeft posts={ posts }/>
+        <BlogPostsMenuLeft posts={ simplifiedPosts }/>
       </div>
       <div className="grid_4 last">
         <Outlet />

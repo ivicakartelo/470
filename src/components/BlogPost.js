@@ -24,13 +24,14 @@ function BlogPost() {
   const paragraphs = blogpost.blogpost.split('\n');
 
   return (
-    <>
+  <>
     <h1>{blogpost.heading}</h1>
-    {paragraphs.map((paragraph, index) => (
-      <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></p>
+      {paragraphs.map((paragraph, index) => (
+      <p key={index} dangerouslySetInnerHTML=
+      {{ __html: paragraph }}></p>
     ))}
   </>
-  );
+  )
 }
 
 export default BlogPost;
