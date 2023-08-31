@@ -29,7 +29,11 @@ function App() {
         <LoginModal />
       </div>
       <div className="grid_2">
-        <BlogPostsMenuLeft posts={ simplifiedPosts }/>
+      {posts.length > 0 ? ( // Check if 'posts' has data
+          <BlogPostsMenuLeft posts={simplifiedPosts} />
+        ) : (
+          <p>Loading...</p> // Display a loading message while fetching data
+        )}
       </div>
       <div className="grid_4 last">
         <Outlet />

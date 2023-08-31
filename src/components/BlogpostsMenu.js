@@ -18,7 +18,7 @@ function BlogpostsMenu() {
                 console.log(error);
             });
     }, []);
-    
+
     return (
         <>
             {posts.map((post) => (
