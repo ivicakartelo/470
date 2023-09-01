@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 function BlogPostsMenuLeft({ posts }) {
   console.log(posts)
@@ -15,5 +15,5 @@ function BlogPostsMenuLeft({ posts }) {
   );
 }
 
-export default BlogPostsMenuLeft;
-//export default React.memo(BlogPostsMenuLeft); // Memoize the component
+//export default BlogPostsMenuLeft;
+export default React.memo(BlogPostsMenuLeft); // Memoize the component
